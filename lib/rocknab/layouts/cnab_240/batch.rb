@@ -5,7 +5,7 @@ require_relative "segment"
 module Rocknab
   module Layouts
     module CNAB240
-      class Batch < Struct.new(:params, :payments, :is_same_bank, :is_ted, :is_savings,
+      class Batch < Struct.new(:params, :payments, :is_same_bank, :is_ted, :is_pix, :is_savings,
         :batch_index)
         BATCH_PARAMS = [ :bank_code, :cnpj, :branch, :account, :digit, :name,
           :zipcode, :state, :payment_type, :payment_reason ]
@@ -61,6 +61,8 @@ module Rocknab
             1
           elsif is_ted
             41
+          elsif is_pix
+            45
           else
             3
           end

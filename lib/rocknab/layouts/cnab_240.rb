@@ -46,8 +46,9 @@ module Rocknab
             config, batch_payments = group
             is_same_bank = config[:is_same_bank]
             is_ted = config[:is_ted]
+            is_pix = config[:is_pix]
             is_savings = config[:is_savings]
-            Batch.new(params, batch_payments, is_same_bank, is_ted, is_savings, index + 1).build
+            Batch.new(params, batch_payments, is_same_bank, is_ted, is_pix, is_savings, index + 1).build
           end
         end
 
@@ -55,11 +56,13 @@ module Rocknab
           payments.group_by do |payment|
             is_same_bank = payment.dig(:bank) === params.dig(:bank_code)
             is_ted = payment.dig(:is_ted)
+            is_pix = payment.dig(:is_pix)
             is_savings = payment.dig(:is_savings)
 
             {
               is_same_bank: is_same_bank,
               is_ted: !is_same_bank && is_ted,
+              is_pix: !is_same_bank && is_pix,
               is_savings: is_savings,
             }
           end
