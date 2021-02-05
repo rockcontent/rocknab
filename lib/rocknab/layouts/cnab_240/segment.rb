@@ -9,8 +9,7 @@ module Rocknab
 
         text :segment_type, length: 1, default: "A"
         number :service_type, length: 3, default: 0
-
-        padding length: 3, char: "0"
+        number :camara, length: 3, default: "009"
 
         number :bank, length: 3, default: 0
         number :branch, length: 5
@@ -28,7 +27,9 @@ module Rocknab
         date :date, length: 8
         text :currency_type, length: 3, default: "REA"
 
-        padding length: 15, char: "0"
+        padding length: 8, char: "0"
+        number :transfer_type, length: 2, default: "01"
+        padding length: 5, char: "0"
 
         number :value, length: 15
         text :our_number, length: 15
